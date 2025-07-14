@@ -1,0 +1,10 @@
+# Ignore Windows executable files
+*.exe
+
+# Ignore object files and build outputs
+*.out
+*.o
+*.obj
+
+# Ignore VS Code specific settings
+.vscode/
