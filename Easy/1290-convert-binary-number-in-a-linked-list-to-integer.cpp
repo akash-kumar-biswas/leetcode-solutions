@@ -10,27 +10,15 @@
  */
 class Solution {
 public:
-    int size_linkedlist(ListNode* head){
-        ListNode* curr = head;
-        int cnt = 0;
-
-        while(curr != nullptr){
-            curr = curr->next;
-            cnt++;
-        }
-        return cnt;
-    }
-
     int getDecimalValue(ListNode* head) {
-       int i = size_linkedlist(head) - 1; 
 
        ListNode* curr = head;
        int num = 0;
 
         while(curr != nullptr){
-            num |= (curr->val) * (1<<i);
+            num <<= 1;
+            num |= (curr->val);
             curr = curr->next;
-            i--;
         }
         return num;
     }
