@@ -7,18 +7,16 @@ public:
         for(int i = 1; i < arr.size(); i++){
             pref_xor[i] = arr[i]^pref_xor[i-1];
         }
-        int cnt = 0;
+        int ans = 0;
         for(int i = 0; i < arr.size()-1; i++){
-            for(int j = i+1; j < arr.size(); j++){
-                for(int k = j; k < arr.size(); k++){
-                    int a = pref_xor[j-1] ^ ((i==0)?0:pref_xor[i-1]);
-                    int b = pref_xor[k] ^ pref_xor[j-1];
+            for(int k = i+1; k < arr.size(); k++){
+            
+                int xor_i_to_k = pref_xor[k] ^ ((i==0)?0:pref_xor[i-1]);
 
-                    if(a == b)
-                        cnt++;
-                }
+                if(xor_i_to_k == 0)
+                    ans += (k - i);
             }
         }
-        return cnt;
+        return ans;
     }
 };
