@@ -8,42 +8,28 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
+    ListNode *head1;
 
-    ListNode* reverse(ListNode* head){
-        if(!head || !head->next)
-            return head;
-        
-        ListNode* newHead = reverse(head->next);
-        head->next->next = head;
-        head->next = nullptr;
-        
-        return newHead;
-    }
+    bool solve(ListNode *head)
+    {
+        if (!head)
+            return true;
 
-    ListNode* middleNode(ListNode* head) {
-        ListNode* slow = head, *fast = head;
+        if (!solve(head->next))
+            return false;
 
-        while(fast && fast->next){
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-
-        return slow;
-    }
-
-    bool isPalindrome(ListNode* head) {
-        ListNode* midNode = middleNode(head);
-
-        ListNode* reverse_head = reverse(midNode);
-    
-        while(head != midNode){
-            if(head->val != reverse_head->val)
-                return false;
-            head = head->next;
-            reverse_head = reverse_head->next;
-        }
+        if (head1->val != head->val)
+            return false;
+        head1 = head1->next;
         return true;
+    }
+
+    bool isPalindrome(ListNode *head)
+    {
+        head1 = head;
+        return solve(head);
     }
 };
