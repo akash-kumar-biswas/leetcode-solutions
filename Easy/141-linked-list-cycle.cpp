@@ -6,19 +6,25 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    bool hasCycle(ListNode *head) {
-        unordered_set<ListNode*> ust;
+    bool hasCycle(ListNode *head)
+    {
+        if (!head)
+            return false;
 
-        ListNode* curr = head;
+        ListNode *slow = head, *fast = head;
 
-        while(curr){
-            if(ust.count(curr))
+        while (fast && fast->next)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if (slow == fast)
                 return true;
-            ust.insert(curr);
-            curr = curr->next;
         }
+
         return false;
     }
 };
