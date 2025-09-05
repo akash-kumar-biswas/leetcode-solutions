@@ -1,16 +1,22 @@
-class Solution {
+class Solution
+{
 public:
-    int maxProduct(vector<int>& nums) {
-        priority_queue<int> pq;
+    int maxProduct(vector<int> &nums)
+    {
+        int maxNum = *max_element(nums.begin(), nums.end());
 
-        for(auto num: nums){
-            pq.push(num);
+        int sec_max = 0;
+        int cnt_max = 0;
+        for (auto num : nums)
+        {
+            if (maxNum == num)
+                cnt_max++;
+            else
+                sec_max = max(sec_max, num);
         }
 
-        int maxNum = pq.top();
-        pq.pop();
-        int sec_maxNum = pq.top();
-
-        return (maxNum - 1) * (sec_maxNum - 1);
+        return (cnt_max > 1) ? (maxNum - 1) * (maxNum - 1) : (maxNum - 1) * (sec_max - 1);
     }
 };
+
+// Time Complexity = O(N)
